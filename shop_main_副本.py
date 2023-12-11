@@ -1,12 +1,7 @@
 from web3 import Web3,Account
 from web3.middleware import geth_poa_middleware
 import time
-
-
-
-
 class EvmClass(object):
-
     def __init__(self,rpc,private_key,to_address,hash_list):
         #rpc信息
         self.rpc = rpc 
@@ -46,11 +41,8 @@ class EvmClass(object):
             gas_price_gwei = self.w3.from_wei(gas_price, 'Gwei')
             value = self.w3.to_wei(0, 'ether')
             print("当前nonce:",nonce,"当前gas:",gas_price_gwei,'发送地址:',self.from_address)
-
             data_hex = _hash
-
             print("data_hex ",data_hex)
-
             # 批量发送交易
             for i in range(self.lim):
                 transaction = {
@@ -63,8 +55,6 @@ class EvmClass(object):
                     'data': data_hex,  # 要添加到 Input Data 的自定义数据
                     'chainId': self.chain_id  # 区块链id
                 }
-                # print(transaction)
-                # print(transaction)
                 # 2.签名交易
                 signed = self.w3.eth.account.sign_transaction(transaction, private_key)
                 try:
@@ -81,9 +71,7 @@ class EvmClass(object):
         for _hash in self.hash_list:
             print(_hash,hash_count)
 
-        
-
-#拆分数量 防止 none 过大 导致无法广播,100次拆分一次
+    
 # none_nums = 1
 
 hash_list = ['。。。。。。。'] #哈希列表
